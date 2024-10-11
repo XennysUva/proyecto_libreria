@@ -1,14 +1,16 @@
 package Vista;
 
+import MInterfaces.Libro;
 import MInterfaces.Servicio;
 import Modelo.Estudiantes;
 import Modelo.Editorial;
+import Modelo.LibroDigital;
 import Modelo.Libros;
 import Modelo.Prestamos;
 import Servicios.EditorialS;
 import Servicios.EstudianteS;
+import Servicios.LibroFactory;
 import Servicios.LibrosS;
-import Servicios.LibrosSFactory;
 import Servicios.PrestamosS;
 import Servicios.PrestamosSFactory;
 import Servicios.ServiciosFactory;
@@ -235,6 +237,8 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
         jTable17 = new javax.swing.JTable();
         jButton5 = new javax.swing.JButton();
         btnClonar_libro = new javax.swing.JButton();
+        bnt_digital = new javax.swing.JButton();
+        btn_fisico = new javax.swing.JButton();
         pnlPrestamos = new javax.swing.JPanel();
         jDesktopPane7 = new javax.swing.JDesktopPane();
         txtCod_prestamos = new javax.swing.JTextField();
@@ -328,23 +332,23 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
         });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("DNI ");
 
         Seccionxd.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
-        Seccionxd.setForeground(new java.awt.Color(255, 255, 255));
+        Seccionxd.setForeground(new java.awt.Color(0, 0, 0));
         Seccionxd.setText("Sección");
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Grado");
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Nombres");
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Apellidos");
 
         btnBuscarE.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
@@ -550,15 +554,15 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
         });
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Cod editorial");
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Telefono");
 
         jLabel8.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Nom editorial");
 
         btnBuscarEdi.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
@@ -761,23 +765,23 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
         });
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Codigo libro");
 
         jLabel10.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Nombre libro");
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Autor");
 
         jLabel12.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Stock");
 
         jLabel19.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setForeground(new java.awt.Color(0, 0, 0));
         jLabel19.setText("Selec editorial");
 
         btnBuscarl.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
@@ -820,6 +824,22 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
             }
         });
 
+        bnt_digital.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
+        bnt_digital.setText("Libro Digital");
+        bnt_digital.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnt_digitalActionPerformed(evt);
+            }
+        });
+
+        btn_fisico.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
+        btn_fisico.setText("Libro Fisico");
+        btn_fisico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_fisicoActionPerformed(evt);
+            }
+        });
+
         jDesktopPane5.setLayer(txtCod_libro, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane5.setLayer(txtNom_libro, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane5.setLayer(txtStock, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -837,6 +857,8 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
         jDesktopPane5.setLayer(jScrollPane17, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane5.setLayer(jButton5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane5.setLayer(btnClonar_libro, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane5.setLayer(bnt_digital, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane5.setLayer(btn_fisico, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane5Layout = new javax.swing.GroupLayout(jDesktopPane5);
         jDesktopPane5.setLayout(jDesktopPane5Layout);
@@ -861,14 +883,20 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
                                 .addComponent(cbxEditorial, javax.swing.GroupLayout.Alignment.LEADING, 0, 212, Short.MAX_VALUE)
                                 .addComponent(txtAutor, javax.swing.GroupLayout.Alignment.LEADING))))
                     .addGroup(jDesktopPane5Layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(jDesktopPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(50, 50, 50)
+                        .addGroup(jDesktopPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnBuscarl)
-                            .addComponent(btnEliminar_libro, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAgregarExis, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAgregar_libro, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnClonar_libro, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jDesktopPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAgregar_libro, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAgregarExis, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnClonar_libro, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnEliminar_libro, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jDesktopPane5Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(bnt_digital, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(btn_fisico, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 599, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 99, Short.MAX_VALUE))
@@ -896,20 +924,24 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
                 .addGroup(jDesktopPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxEditorial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGap(20, 20, 20)
                 .addComponent(btnAgregar_libro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAgregarExis)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBuscarl)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnClonar_libro)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnEliminar_libro)
-                .addGap(21, 21, 21))
-            .addComponent(jScrollPane17, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jDesktopPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_fisico)
+                    .addComponent(bnt_digital))
+                .addGap(19, 19, 19))
+            .addComponent(jScrollPane17, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout pnlLibro13Layout = new javax.swing.GroupLayout(pnlLibro13);
@@ -954,23 +986,23 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
 
         jLabel13.setBackground(new java.awt.Color(255, 255, 255));
         jLabel13.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("Codigo libro");
 
         jLabel14.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("Codigo prestamo");
 
         jLabel15.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setText("DNI");
 
         jLabel16.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
         jLabel16.setText("Fecha prestamo");
 
         jLabel17.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setForeground(new java.awt.Color(0, 0, 0));
         jLabel17.setText("Fecha devolucion");
 
         btnBuscarPre.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
@@ -1601,19 +1633,44 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
 
     }//GEN-LAST:event_btnClonar_libroActionPerformed
 
-    public static void main(String args[]) {
-       // Fábrica para LibrosS
-        LibrosSFactory librosFactory = new LibrosSFactory();
-        Servicio servicioLibros = librosFactory.crearServicio();
-        servicioLibros.mostrarInformacion();  // "Este es el servicio de libros."
+    private void bnt_digitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnt_digitalActionPerformed
+  String nombre = JOptionPane.showInputDialog("Ingrese el nombre del libro digital:");
+    String autor = JOptionPane.showInputDialog("Ingrese el autor del libro digital:");
 
-        // Fábrica para PrestamosS
-        PrestamosSFactory prestamosFactory = new PrestamosSFactory();
-        Servicio servicioPrestamos = prestamosFactory.crearServicio();
-        servicioPrestamos.mostrarInformacion();  // "Este es el servicio de préstamos."
-    
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+    if (nombre != null && autor != null) {
+        // Creandooo libro usando factory
+        Libro nuevoLibro = LibroFactory.crearLibro("digital", nombre, autor);
+
+        if (LibrosS.getInstancia().insertar((Libros) nuevoLibro)) {
+            JOptionPane.showMessageDialog(this, "Libro digital agregado.");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al agregar el libro digital.");
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Datos de libro inválidos.");
+    }
+    }//GEN-LAST:event_bnt_digitalActionPerformed
+
+    private void btn_fisicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_fisicoActionPerformed
+       String nombre = JOptionPane.showInputDialog("Ingrese el nombre del libro físico:");
+    String autor = JOptionPane.showInputDialog("Ingrese el autor del libro físico:");
+
+    if (nombre != null && autor != null) {
+        // Creaando libro con factory
+        Libro nuevoLibro = LibroFactory.crearLibro("fisico", nombre, autor);
+
+        if (LibrosS.getInstancia().insertar((Libros) nuevoLibro)) {
+            JOptionPane.showMessageDialog(this, "Libro físico agregado.");
+        } else {
+            JOptionPane.showMessageDialog(this, "Error al agregar el libro físico.");
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Datos de libro inválidos.");
+    }
+    }//GEN-LAST:event_btn_fisicoActionPerformed
+
+    public static void main(String args[]) {
+       java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Principal().setVisible(true);
             }
@@ -1622,6 +1679,7 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Seccionxd;
+    private javax.swing.JButton bnt_digital;
     private javax.swing.JButton btnAgregarEditorial;
     private javax.swing.JButton btnAgregarEstu;
     private javax.swing.JButton btnAgregarExis;
@@ -1637,6 +1695,7 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
     private javax.swing.JButton btnEliminar_libro;
     private javax.swing.JButton btnEliminar_prestamo;
     private javax.swing.JButton btnUbicacionesGrafo;
+    private javax.swing.JButton btn_fisico;
     private javax.swing.JComboBox<String> cbxEditorial;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
