@@ -1,7 +1,8 @@
 package ModeloDAO;
 
 import Confi.Conexion;
-import MInterfaces.LibrosInterface;
+import MInterfaces.Libro;
+import Adapter.LibrosInterface;
 import Modelo.Libros;
 import java.sql.*;
 import java.util.ArrayList;
@@ -150,6 +151,21 @@ public class LibrosDAO implements LibrosInterface {
         }
         return 0;
 
+    }
+
+    @Override
+    public void abrir() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void leer() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public boolean insertar(Libro nuevoLibroDigital) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

@@ -4,6 +4,7 @@
  */
 package Servicios;
 
+import Abstractfactory.EditorialAF;
 import Modelo.Editorial;
 import java.util.ArrayList;
 
@@ -13,11 +14,19 @@ import java.util.ArrayList;
  */
 public class EditorialSExtra {
     
-    public int validarCoden(String cod, ArrayList<Editorial> editoriales) {
+     public int validarCoden(String cod, ArrayList<Editorial> editoriales) {
         return (int) editoriales.stream().filter(e -> e.getCod_editorial().equals(cod)).count();
     }
 
     public int validarTelefono(String telefono, ArrayList<Editorial> editoriales) {
+        return (int) editoriales.stream().filter(e -> e.getTelefono().equals(telefono)).count();
+    }
+    
+     public int validarCodE(String cod, ArrayList<EditorialAF> editoriales) {
+        return (int) editoriales.stream().filter(e -> e.getCod_editorial().equals(cod)).count();
+    }
+
+    public int validarTelef(String telefono, ArrayList<EditorialAF> editoriales) {
         return (int) editoriales.stream().filter(e -> e.getTelefono().equals(telefono)).count();
     }
 }
