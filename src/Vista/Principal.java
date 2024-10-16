@@ -584,7 +584,7 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
         });
 
         jLabel18.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
         jLabel18.setText("Categoria");
 
         jDesktopPane8.setLayer(txtCod_editorial, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -798,7 +798,7 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel21.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setForeground(new java.awt.Color(0, 0, 0));
         jLabel21.setText("Categoria");
 
         btnConstruir_libro.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
