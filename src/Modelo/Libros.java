@@ -8,6 +8,7 @@ public class Libros implements Prototype<Libros> {
     private String stock;
     private String autor;
     private String cod_editorial;
+    private String tipo;
 
     
     public String getCod_libro() {
@@ -49,6 +50,13 @@ public class Libros implements Prototype<Libros> {
     public void setCod_editorial(String nom_editorial) {
         this.cod_editorial = nom_editorial;
     }
+     public String getTipo() {
+        return tipo;
+    }
+     public void setTipo(String categoria) { 
+        this.tipo = categoria;
+    }
+    
 
      @Override
     public Libros clone() {
@@ -58,6 +66,7 @@ public class Libros implements Prototype<Libros> {
         cloned.setStock(this.stock);
         cloned.setAutor(this.autor);
         cloned.setCod_editorial(this.cod_editorial);
+        cloned.setTipo(this.tipo);
         return cloned;
     }
 }

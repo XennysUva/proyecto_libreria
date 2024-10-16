@@ -14,13 +14,33 @@ import java.util.ArrayList;
  * @author mathi
  */
 public class LibroFisico implements Libro, LibrosInterface {
-    private String nombre;
-    private String autor;
-
-    public LibroFisico(String nombre, String autor) {
+      private String cod_libro; 
+    private String nombre;   
+    private String autor;     
+    private String stock;     
+    
+    public LibroFisico(String cod_libro, String nombre, String autor, String stock) {
+        this.cod_libro = cod_libro;
         this.nombre = nombre;
         this.autor = autor;
+        this.stock = stock;
     }
+    public String getCod_libro() {
+        return cod_libro;
+    }
+
+    public String getNom_libro() {
+        return nombre;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public String getStock() {
+        return stock;
+    }
+
 
   
     @Override

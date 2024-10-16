@@ -38,6 +38,7 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
     private final DefaultTableModel modeloEditoriales;
     private final DefaultTableModel modeloLibros;
     private final DefaultTableModel modeloPrestamos;
+   
     
     // Inicializa servicios y modelos SINGLETON
         EstudianteS estudiantesServiceInst =EstudianteS.getInstancia();
@@ -55,6 +56,7 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
         modeloEditoriales = new DefaultTableModel();
         modeloLibros = new DefaultTableModel();
         modeloPrestamos = new DefaultTableModel();
+       
 
         // Configura la interfaz
         configureUI();
@@ -82,6 +84,7 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
         modeloEstudiantes.addColumn("Apellidos");
         modeloEstudiantes.addColumn("Grado");
         modeloEstudiantes.addColumn("Seccion");
+        
         jTable1.setModel(modeloEstudiantes);
     }
     
@@ -138,6 +141,7 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
         modeloLibros.addColumn("Stock");
         modeloLibros.addColumn("Autor");
         modeloLibros.addColumn("Cod_editorial");
+        modeloLibros.addColumn("Tipo");
         jTable17.setModel(modeloLibros);
     }
 
@@ -146,14 +150,17 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
         txtNom_libro.setText(null);
         txtStock.setText(null);
         txtAutor.setText(null);
+    
+        
     }
 
     private void mostrarTodosLibros() {
-        ArrayList<Libros> libros = librosService.listarTodo();
-        for (Libros libro : libros) {
-            Object[] data = {libro.getCod_libro(), libro.getNom_libro(), libro.getStock(), libro.getAutor(), libro.getCod_editorial()};
-            modeloLibros.addRow(data);
-        }
+      ArrayList<Libros> libros = librosService.listarTodo();
+       modeloLibros.setRowCount(0);
+    for (Libros libro : libros) {
+        Object[] data = {libro.getCod_libro(), libro.getNom_libro(), libro.getStock(), libro.getAutor(), libro.getCod_editorial(), libro.getTipo()};
+        modeloLibros.addRow(data);
+    }
     }
 
     //Metodos de los prestamos
@@ -237,9 +244,7 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
         btnBuscarl = new javax.swing.JButton();
         jScrollPane17 = new javax.swing.JScrollPane();
         jTable17 = new javax.swing.JTable();
-        bnt_digital = new javax.swing.JButton();
-        btn_fisico = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbx_Tipo = new javax.swing.JComboBox<>();
         jLabel21 = new javax.swing.JLabel();
         btnConstruir_libro = new javax.swing.JButton();
         pnlPrestamos = new javax.swing.JPanel();
@@ -768,34 +773,23 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
 
         jTable17.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Title 1", "Title 2", "Title 3", "Title 4", "Tile 5"
             }
         ));
         jScrollPane17.setViewportView(jTable17);
 
-        bnt_digital.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
-        bnt_digital.setText("Libro Digital");
-        bnt_digital.addActionListener(new java.awt.event.ActionListener() {
+        cbx_Tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "digital", "fisico" }));
+        cbx_Tipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bnt_digitalActionPerformed(evt);
+                cbx_TipoActionPerformed(evt);
             }
         });
-
-        btn_fisico.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
-        btn_fisico.setText("Libro Fisico");
-        btn_fisico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_fisicoActionPerformed(evt);
-            }
-        });
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel21.setFont(new java.awt.Font("Times New Roman", 3, 15)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(0, 0, 0));
@@ -820,9 +814,7 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
         jDesktopPane5.setLayer(jLabel19, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane5.setLayer(btnBuscarl, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane5.setLayer(jScrollPane17, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane5.setLayer(bnt_digital, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane5.setLayer(btn_fisico, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane5.setLayer(jComboBox1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane5.setLayer(cbx_Tipo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane5.setLayer(jLabel21, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane5.setLayer(btnConstruir_libro, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -853,7 +845,7 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
                             .addGroup(jDesktopPane5Layout.createSequentialGroup()
                                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(cbx_Tipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jDesktopPane5Layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addGroup(jDesktopPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -862,12 +854,7 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
                             .addComponent(btnBuscarl)))
                     .addGroup(jDesktopPane5Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addGroup(jDesktopPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAgregar_libro, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jDesktopPane5Layout.createSequentialGroup()
-                                .addComponent(bnt_digital, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btn_fisico, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(btnAgregar_libro, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jDesktopPane5Layout.createSequentialGroup()
                         .addGap(107, 107, 107)
                         .addComponent(btnConstruir_libro)))
@@ -884,7 +871,7 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
                     .addComponent(txtCod_libro))
                 .addGap(8, 8, 8)
                 .addGroup(jDesktopPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbx_Tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jDesktopPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -912,11 +899,7 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
                 .addComponent(btnConstruir_libro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnEliminar_libro)
-                .addGap(18, 18, 18)
-                .addGroup(jDesktopPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_fisico)
-                    .addComponent(bnt_digital))
-                .addGap(19, 19, 19))
+                .addGap(63, 63, 63))
             .addComponent(jScrollPane17, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
         );
 
@@ -1361,6 +1344,7 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
         String nom_libro = txtNom_libro.getText().trim();
         String stock = txtStock.getText().trim();
         String autor = txtAutor.getText().trim();
+        String tipo = cbx_Tipo.getSelectedItem().toString(); 
 
         // Validación básica de campos vacíos
         if (cod_libro.isEmpty() || nom_libro.isEmpty() || stock.isEmpty() || autor.isEmpty()) {
@@ -1385,11 +1369,20 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
                 // Obtener la editorial seleccionada
                 String cbxEditorial1 = cbxEditorial.getSelectedItem().toString();
                 String cbxEditorialv = cbxEditorial1.substring(0, 4);
+                // Creando el libro con factory
+            Libro nuevoLibro = LibroFactory.crearLibro(tipo, cod_libro, nom_libro, autor, stock);
 
-                // Agregar el nuevo libro
-                Object[] data = {cod_libro, nom_libro, stock, autor, cbxEditorialv};
+        
+            if (nuevoLibro != null) {
+               
+                Object[] data = {cod_libro, nom_libro, stock, autor, cbxEditorialv, tipo}; 
                 modeloLibros.addRow(data);
+
                 JOptionPane.showInternalMessageDialog(null, "Libro registrado correctamente.", "Registro Exitoso!!", JOptionPane.INFORMATION_MESSAGE);
+                limpiarCajasLib();
+            } else {
+                JOptionPane.showInternalMessageDialog(null, "Tipo de libro no válido.", "Error en el Tipo!!", JOptionPane.ERROR_MESSAGE);
+            }
                 limpiarCajasLib();
             }
         }
@@ -1528,61 +1521,6 @@ private final PrestamosS prestamosService = PrestamosS.getInstancia();
         txtCod_prestamos.requestFocus();
     }//GEN-LAST:event_txtDnipresActionPerformed
 
-    private void bnt_digitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnt_digitalActionPerformed
-String nombre = JOptionPane.showInputDialog("Ingrese el nombre del libro digital:");
-    String autor = JOptionPane.showInputDialog("Ingrese el autor del libro digital:");
-
-    if (nombre != null && autor != null) {
-        // facotry para el libro digital
-        Libro nuevoLibroDigital = LibroFactory.crearLibro("digital", nombre, autor);
-        
-        if (nuevoLibroDigital != null) {
-            // adapter
-            LibrosInterface libroAdapter = new LibroAdapter(nuevoLibroDigital);
-            libroAdapter.abrir(); //metodo adapter
-            
-            // insertar el libro atravex de adapter
-            if (libroAdapter.insertar(nuevoLibroDigital)) {
-                JOptionPane.showMessageDialog(this, "Libro digital agregado.");
-            } else {
-                JOptionPane.showMessageDialog(this, "Error al agregar el libro digital.");
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Error al crear el libro digital.");
-        }
-    } else {
-        JOptionPane.showMessageDialog(this, "Datos de libro inválidos.");
-    }
-    }//GEN-LAST:event_bnt_digitalActionPerformed
-
-    private void btn_fisicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_fisicoActionPerformed
-   String nombre = JOptionPane.showInputDialog("Ingrese el nombre del libro físico:");
-    String autor = JOptionPane.showInputDialog("Ingrese el autor del libro físico:");
-
-    if (nombre != null && autor != null) {
-        // usando factory para crear el libro fiscocc
-        Libro nuevoLibroFisico = LibroFactory.crearLibro("fisico", nombre, autor);
-        
-        if (nuevoLibroFisico != null) {
-            // usando adapter con abrir
-            LibrosInterface libroAdapter = new LibroAdapter(nuevoLibroFisico);
-            libroAdapter.abrir(); // llamando asumedtodo
-            
-            // insertar el libro con el adaptador
-            if (libroAdapter.insertar(nuevoLibroFisico)) {
-                JOptionPane.showMessageDialog(this, "Libro físico agregado.");
-            } else {
-                JOptionPane.showMessageDialog(this, "Error al agregar el libro físico.");
-            }
-        } else {
-         
-            JOptionPane.showMessageDialog(this, "Error al crear el libro físico.");
-        }
-    } else {
-        JOptionPane.showMessageDialog(this, "Datos de libro inválidos.");
-    }
-    }//GEN-LAST:event_btn_fisicoActionPerformed
-
     private void cbxCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCategoriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxCategoriaActionPerformed
@@ -1641,6 +1579,10 @@ String nombre = JOptionPane.showInputDialog("Ingrese el nombre del libro digital
         }
     }//GEN-LAST:event_btnClonar_prestamoActionPerformed
 
+    private void cbx_TipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_TipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_TipoActionPerformed
+
     public static void main(String args[]) {
        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -1651,7 +1593,6 @@ String nombre = JOptionPane.showInputDialog("Ingrese el nombre del libro digital
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Seccionxd;
-    private javax.swing.JButton bnt_digital;
     private javax.swing.JButton btnAgregarEditorial;
     private javax.swing.JButton btnAgregarEstu;
     private javax.swing.JButton btnAgregarExis;
@@ -1667,10 +1608,9 @@ String nombre = JOptionPane.showInputDialog("Ingrese el nombre del libro digital
     private javax.swing.JButton btnEliminarEditorial;
     private javax.swing.JButton btnEliminar_libro;
     private javax.swing.JButton btnEliminar_prestamo;
-    private javax.swing.JButton btn_fisico;
     javax.swing.JComboBox<String> cbxCategoria;
     private javax.swing.JComboBox<String> cbxEditorial;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbx_Tipo;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JDesktopPane jDesktopPane5;
